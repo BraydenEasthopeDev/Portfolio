@@ -24,6 +24,13 @@ body {
   font-family: "Poppins", system-ui, sans-serif;
   background: radial-gradient(circle at top, #3a2415 0, var(--espresso) 55%);
   color: var(--cream);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }
 
 /* Wrapper */
@@ -201,10 +208,11 @@ body {
     radial-gradient(circle at top left, rgba(234, 88, 12, 0.4), transparent 50%),
     var(--warm-brown);
   min-height: 260px;
+  max-height: 260px;
   overflow: hidden;
   box-shadow: 0 25px 55px rgba(0, 0, 0, 0.7);
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
 }
 
 .hero-card::before {
@@ -215,10 +223,23 @@ body {
   border-radius: 17px;
 }
 
+.hero-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
 .hero-card-info {
   padding: 1.3rem 1.5rem;
   background: linear-gradient(to top, rgba(32, 26, 26, 0.95), rgba(32, 26, 26, 0.1));
   width: 100%;
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
 }
 
 .hero-card-name {
@@ -400,6 +421,7 @@ footer {
   background: #1a1412;
   padding: 2rem 7%;
   border-top: 1px solid rgba(248, 250, 252, 0.06);
+  margin-top: auto;
 }
 
 .footer2 {
@@ -448,62 +470,47 @@ footer {
 /* ====== MOBILE NAV ====== */
 
 @media (max-width: 800px) {
-  .navbar input[type="checkbox"],
-  .navbar .hamburger-lines {
-    display: block;
-  }
-
-  .navbar input[type="checkbox"] {
-    position: absolute;
-    top: 18px;
-    left: 14px;
-    width: 30px;
-    height: 30px;
-    opacity: 0;
-    cursor: pointer;
-    z-index: 3;
-  }
-
-  .hamburger-lines {
-    position: absolute;
-    top: 20px;
-    left: 16px;
-    width: 30px;
-    height: 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    z-index: 2;
-  }
-
-  .hamburger-lines .line {
-    height: 3px;
-    width: 100%;
-    border-radius: 4px;
-    background: var(--cream);
-    transition: 0.25s ease;
-  }
-
   .menu-items {
     position: fixed;
-    top: 0;
-    left: 0;
-    background: #2b1b10;
+    left: -100%;
+    top: 70px;
     flex-direction: column;
+    background-color: var(--espresso);
     width: 100%;
-    height: 40vh;
-    padding: 4.5rem 2rem;
-    gap: 1.2rem;
-    transform: translateY(-110%);
-    transition: 0.25s ease;
+    text-align: center;
+    transition: 0.3s;
+    padding: 2rem 0;
+  }
+
+  .menu-items a {
+    display: block;
+    margin: 1.5rem 0;
+  }
+
+  .logo {
+    order: -1;
   }
 
   #nav-toggle:checked ~ .menu-items {
-    transform: translateY(0);
+    left: 0;
+  }
+
+  .hamburger-lines {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+  }
+
+  .hamburger-lines .line {
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: 0.3s;
+    background: var(--dusty-yellow);
   }
 
   #nav-toggle:checked ~ .hamburger-lines .line1 {
-    transform: translateY(7px) rotate(45deg);
+    transform: rotate(-45deg) translate(-5px, 6px);
   }
 
   #nav-toggle:checked ~ .hamburger-lines .line2 {
@@ -511,28 +518,11 @@ footer {
   }
 
   #nav-toggle:checked ~ .hamburger-lines .line3 {
-    transform: translateY(-7px) rotate(-45deg);
+    transform: rotate(45deg) translate(-5px, -6px);
   }
 
-  .logo {
-    margin-left: auto;
-  }
-
-  .hero-inner {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-card {
-    order: -1;
-  }
-
-  .footer2 {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .socials {
-    text-align: center;
+  #nav-toggle {
+    display: none;
   }
 }
 
